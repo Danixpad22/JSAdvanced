@@ -1,14 +1,21 @@
 {
   "name": "jsadvanced",
   "version": "1.0.0",
-  "description": "JSAdvanced",
+  "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "webpack serve --open",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Daniele Padovani",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^5.91.0"
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "axios": "^1.7.2"
   }
 }
