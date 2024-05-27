@@ -1,3 +1,2 @@
-console.log("Hello, Webpack!")
+const axios = require('axios');
 
-console.log('somma=', 4+4)
