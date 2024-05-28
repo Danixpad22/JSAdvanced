@@ -15,7 +15,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const axios = __webpack_require__(/*! axios */ \"./node_modules/axios/dist/browser/axios.cjs\");\r\n\r\nconsole.log(axios.isCancel('something'));\r\n\r\nconsole.log(\"Hello, Webpack!\")\r\n\r\nconsole.log('somma=', 4+4)\n\n//# sourceURL=webpack://jsadvanced/./src/index.js?");
+eval("const axios = __webpack_require__(/*! axios */ \"./node_modules/axios/dist/browser/axios.cjs\");\r\n\r\nconsole.log('ciao')\r\nconsole.log('lele')\r\n\r\nconsole.log('sara')\r\nconsole.log('somma:', 5+5)\n\n//# sourceURL=webpack://jsadvanced/./src/index.js?");
 
 /***/ }),
 
