@@ -1,7 +1,7 @@
+//import axios
 const axios = require('axios');
 
-console.log('ciao')
-console.log('lele')
+//import 'style-loader', 'css-loader'
+import './css/styles.css';
 
-console.log('sara')
-console.log('somma:', 5+5)
+console.log('ciao lele')
