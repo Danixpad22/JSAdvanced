@@ -18,7 +18,6 @@ const loadNews = () => {
       const idNews = responseNews.data;
       const idStartEnd = idNews.slice(start, end);
       const promiseDetails = idStartEnd.map(id => axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`));
-      console.log(promiseDetails);
       return Promise.all(promiseDetails);
     })
     .then(detailsNews => {
