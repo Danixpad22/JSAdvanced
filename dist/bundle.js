@@ -9,24 +9,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/css/styles.css":
-/*!****************************!*\
-  !*** ./src/css/styles.css ***!
-  \****************************/
-/***/ (() => {
+/***/ "./src/js/index.js":
+/*!*************************!*\
+  !*** ./src/js/index.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("throw new Error(\"Module parse failed: Unexpected token (1:0)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> .intro-component {\\n|   padding: 20px;\\n|   color: red;\");\n\n//# sourceURL=webpack://jsadvanced/./src/css/styles.css?");
-
-/***/ }),
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/styles.css */ \"./src/css/styles.css\");\n/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_styles_css__WEBPACK_IMPORTED_MODULE_0__);\n//import axios\r\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/dist/browser/axios.cjs\");\r\n\r\n//import 'style-loader', 'css-loader'\r\n\r\n\r\nconsole.log('ciao lele')\r\n\n\n//# sourceURL=webpack://jsadvanced/./src/index.js?");
+eval("const axios = __webpack_require__(/*! axios */ \"./node_modules/axios/dist/browser/axios.cjs\");\r\n\r\nconst elementoListaNotizie = document.getElementById('lista-notizie');\r\nconst bottoneCaricaAltro = document.getElementById('bottone-carica-altro');\r\nconst dimensionePagina = 10;\r\nlet paginaCorrente = 0;\r\n\r\n// Funzione per caricare le notizie\r\nconst caricaNotizie = () => {\r\n    const inizio = paginaCorrente * dimensionePagina;\r\n    const fine = inizio + dimensionePagina;\r\n\r\n    // Ottenere gli ID delle notizie\r\n    axios.get('https://hacker-news.firebaseio.com/v0/newstories.json')\r\n        .then(rispostaIdNotizie => {\r\n            const idNotizie = rispostaIdNotizie.data;\r\n            const idNotizieCorrenti = idNotizie.slice(inizio, fine);\r\n            const promesseDettagli = idNotizieCorrenti.map(id => axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`));\r\n            return Promise.all(promesseDettagli);\r\n        })\r\n\r\n        // Quando Promise.all(promesseDettagli) si risolve, passa l'array dei risultati alla funzione .then.\r\n        // dettagliNotizie rappresenta questo array di risultati. \r\n        .then(dettagliNotizie => {\r\n            // Creare e aggiungere elementi HTML per ogni notizia alla lista\r\n            dettagliNotizie.forEach(risposta => {\r\n        // Axios standardizza la struttura delle risposte e mette i dati effettivi della risposta nella proprietà data dell'oggetto risposta.\r\n         // const notizia = risposta.data; estrae quindi i dati della notizia dalla risposta e li assegna alla variabile notizia.\r\n                const notizia = risposta.data;\r\n                console.log(notizia)\r\n                const elementoLista = document.createElement('li');\r\n                const link = document.createElement('a');\r\n                //assegnamo la proprieta url ad a appena creata\r\n                link.href = notizia.url;\r\n                link.textContent = notizia.title; //assegna titolo\r\n                link.target = '_blank';\r\n                const data = document.createElement('p');\r\n                // Moltiplicare notizia.time per 1000 (notizia.time * 1000) converte il valore da secondi a millisecondi.\r\n                data.textContent = new Date(notizia.time * 1000).toLocaleString(); //Questo è un metodo dell'oggetto Date in JavaScript che converte la data e l'ora in una stringa leggibile, formattata secondo le impostazioni locali del browser.\r\n\r\n                elementoLista.appendChild(link);\r\n                elementoLista.appendChild(data);\r\n                elementoListaNotizie.appendChild(elementoLista);\r\n            });\r\n\r\n            // Incrementare il numero di pagina per il caricamento successivo\r\n            paginaCorrente++;\r\n        })\r\n        .catch(errore => console.error('Errore nel caricamento delle notizie:', errore));\r\n};\r\n\r\n// Aggiungere un ascoltatore per il click sul pulsante \"Carica altro\"\r\nbottoneCaricaAltro.addEventListener('click', caricaNotizie);\r\n\r\n// Avviare il caricamento delle notizie al caricamento della pagina\r\ncaricaNotizie();\r\n\n\n//# sourceURL=webpack://jsadvanced/./src/js/index.js?");
 
 /***/ }),
 
@@ -68,30 +57,6 @@ eval("// Axios v1.7.2 Copyright (c) 2024 Matt Zabriskie and contributors\n\n\nfu
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -104,28 +69,12 @@ eval("// Axios v1.7.2 Copyright (c) 2024 Matt Zabriskie and contributors\n\n\nfu
 /******/ 		})();
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/js/index.js");
 /******/ 	
 /******/ })()
 ;
