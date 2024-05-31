@@ -1,56 +1,58 @@
+// Import axios
 const axios = require('axios');
 
-const elementoListaNotizie = document.getElementById('lista-notizie');
-const bottoneCaricaAltro = document.getElementById('bottone-carica-altro');
-const dimensionePagina = 10;
-let paginaCorrente = 0;
+// Import CSS styles
+import '../css/styles.css';
 
-// Funzione per caricare le notizie
-const caricaNotizie = () => {
-    const inizio = paginaCorrente * dimensionePagina;
-    const fine = inizio + dimensionePagina;
+const newsElement = document.getElementById('newsList');
+const btnLoadMore = document.getElementById('loadMoreNews');
+const newsForPage = 10;
+let currentPage = 0;
 
-    // Ottenere gli ID delle notizie
-    axios.get('https://hacker-news.firebaseio.com/v0/newstories.json')
-        .then(rispostaIdNotizie => {
-            const idNotizie = rispostaIdNotizie.data;
-            const idNotizieCorrenti = idNotizie.slice(inizio, fine);
-            const promesseDettagli = idNotizieCorrenti.map(id => axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`));
-            return Promise.all(promesseDettagli);
-        })
+const loadNews = () => {
+  const start = newsForPage * currentPage;
+  const end = start + newsForPage;
 
-        // Quando Promise.all(promesseDettagli) si risolve, passa l'array dei risultati alla funzione .then.
-        // dettagliNotizie rappresenta questo array di risultati. 
-        .then(dettagliNotizie => {
-            // Creare e aggiungere elementi HTML per ogni notizia alla lista
-            dettagliNotizie.forEach(risposta => {
-        // Axios standardizza la struttura delle risposte e mette i dati effettivi della risposta nella proprietà data dell'oggetto risposta.
-         // const notizia = risposta.data; estrae quindi i dati della notizia dalla risposta e li assegna alla variabile notizia.
-                const notizia = risposta.data;
-                console.log(notizia)
-                const elementoLista = document.createElement('li');
-                const link = document.createElement('a');
-                //assegnamo la proprieta url ad a appena creata
-                link.href = notizia.url;
-                link.textContent = notizia.title; //assegna titolo
-                link.target = '_blank';
-                const data = document.createElement('p');
-                // Moltiplicare notizia.time per 1000 (notizia.time * 1000) converte il valore da secondi a millisecondi.
-                data.textContent = new Date(notizia.time * 1000).toLocaleString(); //Questo è un metodo dell'oggetto Date in JavaScript che converte la data e l'ora in una stringa leggibile, formattata secondo le impostazioni locali del browser.
+  axios.get('https://hacker-news.firebaseio.com/v0/newstories.json')
+    .then(responseNews => {
+      const idNews = responseNews.data;
+      const idStartEnd = idNews.slice(start, end);
+      const promiseDetails = idStartEnd.map(id => axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`));
+      console.log(promiseDetails);
+      return Promise.all(promiseDetails);
+    })
+    .then(detailsNews => {
+      detailsNews.forEach(response => {
+        const news = response.data;
 
-                elementoLista.appendChild(link);
-                elementoLista.appendChild(data);
-                elementoListaNotizie.appendChild(elementoLista);
-            });
+        // Create news element
+        const listElement = document.createElement('li');
+        const linkElement = document.createElement('a');
 
-            // Incrementare il numero di pagina per il caricamento successivo
-            paginaCorrente++;
-        })
-        .catch(errore => console.error('Errore nel caricamento delle notizie:', errore));
+        // Customize news element
+        listElement.classList.add('li-style');
+        linkElement.classList.add('link-element-style');
+        linkElement.href = news.url;
+        linkElement.textContent = news.title;
+        linkElement.target = '_blank';
+
+        // Create date news
+        const date = document.createElement('p');
+        date.classList.add('date-style');
+        date.textContent = new Date(news.time * 1000).toLocaleString();
+        console.log(date);
+
+        // Append to document
+        listElement.appendChild(linkElement);
+        listElement.appendChild(date);
+        newsElement.appendChild(listElement);  
+      });
+      // Increment the page number for the next load
+      currentPage++;
+    })
+    .catch(error => console.error('Errore nel caricamento delle notizie:', error));
 };
 
-// Aggiungere un ascoltatore per il click sul pulsante "Carica altro"
-bottoneCaricaAltro.addEventListener('click', caricaNotizie);
+btnLoadMore.addEventListener('click',loadNews);
 
-// Avviare il caricamento delle notizie al caricamento della pagina
-caricaNotizie();
+loadNews();
