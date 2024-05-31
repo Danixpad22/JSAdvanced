@@ -4,22 +4,35 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Courier Prime", monospace;
+  font-weight: 400;
+  font-style: normal;
+  padding-top: 50px; 
+
+}
+
 .header-style {
-  height: 150px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000000;
+  background-color: rgb(148, 178, 214);
 }
 
-.img-style {
-  height: 90%;
+.title-style {
+  margin: 0;
+  font-size: 50px;
 }
 
 .div-style {
   width: 100%;
-  background-color: #000000;
+  background-color: rgb(148, 178, 214);
 }
 
 .ul-style {
@@ -30,17 +43,16 @@
 }
 
 .li-style {
-  font-family: "Mukta", sans-serif, Arial, Helvetica;
-  font-weight: 400;
-  font-style: normal;
-  background-color: #0D7AFF;
+  background-color: rgba(255, 255, 255, 0.38);
   margin: 16px;
   padding: 16px;
+  border: 1px solid ;
   border-radius: 5px;
 }
 
 .link-element-style {
-  font-size: 22px;
+  font-weight: bold;
+  font-size: 20px;
   color: black;
   text-decoration: none;
 }
@@ -54,10 +66,16 @@
   color: #000000;
   margin-left: 16px;
   margin-bottom: 16px;
-  background-color: #0D7AFF;
+  background-color: rgba(255, 255, 255, 0.38);
   font-size: 18px;
   padding: 8px;
-  font-family: "Mukta", sans-serif, Arial, Helvetica;
-  font-weight: 400;
-  font-style: normal;
+}
+
+.footer-style {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.38);
+  margin: 0;
+  padding-top: 5px;
+  font-size: 14px;
+
 }
