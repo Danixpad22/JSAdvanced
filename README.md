@@ -1,4 +1,4 @@
-# Hacker News
+# Hacker-News
 
 ## Descrizione
 
@@ -31,4 +31,4 @@ JavaScript
 
 
 # Link al sito
-<a href="https://danixpad22.github.io/JSCounter/">JSCounter<a>
+<a href="https://danixpad22.github.io/JSAdvanced/">Hacker News<a>
