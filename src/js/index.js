@@ -18,7 +18,6 @@ const loadNews = () => {
       const idNews = responseNews.data;
       const idStartEnd = idNews.slice(start, end);
       const promiseDetails = idStartEnd.map(id => axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`));
-      console.log(promiseDetails);
       return Promise.all(promiseDetails);
     })
     .then(detailsNews => {
@@ -27,14 +26,17 @@ const loadNews = () => {
 
         // Create news element
         const listElement = document.createElement('li');
-        const linkElement = document.createElement('a');
+        const titleElement = document.createElement('p');
+        const clickHere = document.createElement('a');
 
         // Customize news element
         listElement.classList.add('li-style');
-        linkElement.classList.add('link-element-style');
-        linkElement.href = news.url;
-        linkElement.textContent = news.title;
-        linkElement.target = '_blank';
+        titleElement.classList.add('title-element-style');
+        clickHere.classList.add('link-element-style');
+        clickHere.href = news.url;
+        clickHere.textContent = 'Click here to read';
+        titleElement.textContent = news.title;
+        clickHere.target = '_blank';
 
         // Create date news
         const date = document.createElement('p');
@@ -43,7 +45,8 @@ const loadNews = () => {
         console.log(date);
 
         // Append to document
-        listElement.appendChild(linkElement);
+        listElement.appendChild(titleElement);
+        listElement.appendChild(clickHere);
         listElement.appendChild(date);
         newsElement.appendChild(listElement);  
       });
